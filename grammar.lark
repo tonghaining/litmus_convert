@@ -1,0 +1,31 @@
+start : threads
+
+threads: thread+
+
+thread: "THREAD" num instructions
+
+instructions: instruction+
+
+instruction: store
+           | eq_goto
+           | exch_goto
+
+store:      num ":" loc "=" num ";"
+
+eq_goto:    num ":" "if" "(" loc return_value ")" "goto" goto_label ";"
+
+exch_goto:  num ":" "if" "(" "Exch" "(" loc "," num ")" return_value ")" "goto" goto_label ";"
+
+loc:    "Mem" "[" num "]"
+
+return_value: "==" num
+
+goto_label:     "END"
+          |     num
+
+num: INT
+
+%import common.INT
+%import common.CNAME
+%import common.WS
+%ignore WS

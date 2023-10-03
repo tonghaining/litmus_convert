@@ -1,0 +1,14 @@
+PTX 8_simple
+{
+Mem0=0;
+P0:r0=0;
+P1:r1=0;
+}
+P0@cta 0,gpu 0                    | P1@cta 0,gpu 0                    ;
+LC00:                             | st.relaxed.gpu Mem0, 0            ;
+atom.relaxed.gpu r0, Mem0, 1      | LC11:                             ;
+beq r0, 0, LC01                   | atom.relaxed.gpu r1, Mem0, 0      ;
+goto LC00                         | beq r1, 1, LC11                   ;
+LC01:                             | goto LC11                         ;
+                                  | LC12:                             ;
+exists true

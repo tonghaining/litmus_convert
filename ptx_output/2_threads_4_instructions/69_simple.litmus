@@ -1,0 +1,15 @@
+PTX 69_simple
+{
+Mem0=0;
+Mem1=0;
+P0:r0=0;
+P1:r1=0;
+}
+P0@cta 0,gpu 0               | P1@cta 0,gpu 0               ;
+st.relaxed.gpu Mem1, 1       | LC10:                        ;
+LC01:                        | ld.relaxed.gpu r1, Mem1      ;
+ld.relaxed.gpu r0, Mem0      | beq r1, 0, LC11              ;
+beq r0, 0, LC02              | goto LC10                    ;
+goto LC01                    | LC11:                        ;
+LC02:                        | st.relaxed.gpu Mem0, 1       ;
+exists true

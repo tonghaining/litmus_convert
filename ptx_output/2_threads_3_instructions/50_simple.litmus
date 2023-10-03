@@ -1,0 +1,17 @@
+PTX 50_simple
+{
+Mem0=0;
+P1:r0=0;
+P1:r1=0;
+}
+P0@cta 0,gpu 0               | P1@cta 0,gpu 0               ;
+st.relaxed.gpu Mem0, 1       | LC10:                        ;
+                             | ld.relaxed.gpu r0, Mem0      ;
+                             | beq r0, 1, LC12              ;
+                             | goto LC10                    ;
+                             | LC11:                        ;
+                             | ld.relaxed.gpu r1, Mem0      ;
+                             | beq r1, 0, LC11              ;
+                             | goto LC11                    ;
+                             | LC12:                        ;
+exists true

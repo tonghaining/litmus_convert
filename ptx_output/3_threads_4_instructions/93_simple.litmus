@@ -1,0 +1,14 @@
+PTX 93_simple
+{
+Mem0=0;
+P1:r0=0;
+P2:r1=0;
+}
+P0@cta 0,gpu 0                    | P1@cta 0,gpu 0                    | P2@cta 0,gpu 0                    ;
+st.relaxed.gpu Mem0, 1            | LC10:                             | LC20:                             ;
+                                  | atom.relaxed.gpu r0, Mem0, 0      | atom.relaxed.gpu r1, Mem0, 0      ;
+                                  | beq r0, 0, LC12                   | beq r1, 0, LC21                   ;
+                                  | goto LC10                         | goto LC20                         ;
+                                  | LC11:                             | LC21:                             ;
+                                  | st.relaxed.gpu Mem0, 1            |                                   ;
+exists true
