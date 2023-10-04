@@ -47,7 +47,7 @@ class PTXOutput:
                 res.append(f"LC{tid}{instruction.iid}:")
             reg = self.get_register(tid)
             res.append(f"ld.relaxed.gpu {reg}, {instruction.loc}")
-            res.append(f"beq {reg}, {instruction.return_value}, LC{tid}{instruction.instruction_id + 1}")
+            res.append(f"beq {reg}, {instruction.return_value}, LC{tid}{instruction.iid + 1}")
             res.append(f"goto LC{tid}{instruction.iid}")
             res.append(f"LC{tid}{instruction.iid + 1}:")
             self.labels[tid] = instruction.iid + 1
@@ -56,7 +56,7 @@ class PTXOutput:
                 res.append(f"LC{tid}{instruction.iid}:")
             reg = self.get_register(tid)
             res.append(f"atom.relaxed.gpu.exch {reg}, {instruction.loc}, {instruction.integer}")
-            res.append(f"beq {reg}, {instruction.return_value}, LC{tid}{instruction.instruction_id + 1}")
+            res.append(f"beq {reg}, {instruction.return_value}, LC{tid}{instruction.iid + 1}")
             res.append(f"goto LC{tid}{instruction.iid}")
             res.append(f"LC{tid}{instruction.iid + 1}:")
             self.labels[tid] = instruction.iid + 1

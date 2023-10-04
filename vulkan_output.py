@@ -47,7 +47,7 @@ class VulkanOutput:
                 res.append(f"LC{tid}{instruction.iid}:")
             reg = self.get_register(tid)
             res.append(f"ld.atom.wg.sc0.semsc0 {reg}, {instruction.loc}")  # .acq?
-            res.append(f"beq {reg}, {instruction.return_value}, LC{tid}{instruction.instruction_id + 1}")
+            res.append(f"beq {reg}, {instruction.return_value}, LC{tid}{instruction.iid + 1}")
             res.append(f"goto LC{tid}{instruction.iid}")
             res.append(f"LC{tid}{instruction.iid + 1}:")
             self.labels[tid] = instruction.iid + 1
@@ -56,7 +56,7 @@ class VulkanOutput:
                 res.append(f"LC{tid}{instruction.iid}:")
             reg = self.get_register(tid)
             res.append(f"rmw.atom.wg.sc0.semsc0 {reg}, {instruction.loc}, {instruction.integer}")  # .acq?
-            res.append(f"beq {reg}, {instruction.return_value}, LC{tid}{instruction.instruction_id + 1}")
+            res.append(f"beq {reg}, {instruction.return_value}, LC{tid}{instruction.iid + 1}")
             res.append(f"goto LC{tid}{instruction.iid}")
             res.append(f"LC{tid}{instruction.iid + 1}:")
             self.labels[tid] = instruction.iid + 1

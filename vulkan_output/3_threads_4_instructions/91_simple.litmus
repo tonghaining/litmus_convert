@@ -1,7 +1,7 @@
 VULKAN 91_simple
 {
-Mem1=0;
 Mem0=0;
+Mem1=0;
 P2:r0=0;
 P2:r1=0;
 }
@@ -12,7 +12,7 @@ LC01:                               | LC11:                               | ld.a
                                     |                                     | goto LC20                           ;
                                     |                                     | LC21:                               ;
                                     |                                     | ld.atom.wg.sc0.semsc0 r1, Mem1      ;
-                                    |                                     | beq r1, 0, LC21                     ;
+                                    |                                     | beq r1, 0, LC22                     ;
                                     |                                     | goto LC21                           ;
                                     |                                     | LC22:                               ;
 exists 0==0

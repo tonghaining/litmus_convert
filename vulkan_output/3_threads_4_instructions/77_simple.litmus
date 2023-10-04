@@ -8,11 +8,11 @@ P2:r2=0;
 P0@sg 0,wg 0, qf 0                      | P1@sg 0,wg 0, qf 0                      | P2@sg 0,wg 0, qf 0                      ;
 st.atom.wg.sc0 Mem0, 1                  | LC10:                                   | LC20:                                   ;
 LC01:                                   | ld.atom.wg.sc0.semsc0 r0, Mem0          | rmw.atom.wg.sc0.semsc0 r2, Mem0, 0      ;
-                                        | beq r0, 0, LC12                         | beq r2, 0, LC21                         ;
+                                        | beq r0, 0, LC11                         | beq r2, 0, LC21                         ;
                                         | goto LC10                               | goto LC20                               ;
                                         | LC11:                                   | LC21:                                   ;
                                         | rmw.atom.wg.sc0.semsc0 r1, Mem0, 1      |                                         ;
-                                        | beq r1, 1, LC11                         |                                         ;
+                                        | beq r1, 1, LC12                         |                                         ;
                                         | goto LC11                               |                                         ;
                                         | LC12:                                   |                                         ;
 exists 0==0

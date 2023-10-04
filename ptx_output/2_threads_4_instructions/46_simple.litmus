@@ -8,15 +8,15 @@ P1:r2=0;
 P0@cta 0,gpu 0               | P1@cta 0,gpu 0               ;
 st.relaxed.gpu Mem0, 1       | LC10:                        ;
 LC01:                        | ld.relaxed.gpu r0, Mem0      ;
-                             | beq r0, 1, LC13              ;
+                             | beq r0, 1, LC11              ;
                              | goto LC10                    ;
                              | LC11:                        ;
                              | ld.relaxed.gpu r1, Mem0      ;
-                             | beq r1, 1, LC13              ;
+                             | beq r1, 1, LC12              ;
                              | goto LC11                    ;
                              | LC12:                        ;
                              | ld.relaxed.gpu r2, Mem0      ;
-                             | beq r2, 0, LC11              ;
+                             | beq r2, 0, LC13              ;
                              | goto LC12                    ;
                              | LC13:                        ;
 exists 0==0

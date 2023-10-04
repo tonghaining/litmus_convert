@@ -1,7 +1,7 @@
 PTX 96_simple
 {
-Mem1=0;
 Mem0=0;
+Mem1=0;
 P0:r0=0;
 P1:r1=0;
 }
