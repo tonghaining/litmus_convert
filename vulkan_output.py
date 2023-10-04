@@ -2,9 +2,10 @@ from pretty_printer import pretty_print
 
 
 class VulkanOutput:
-    def __init__(self, name, program):
+    def __init__(self, name, program, link):
         self.name = name
         self.program = program
+        self.link = link
         self.reg = 0
         self.regs = {}
         self.labels = {}
@@ -20,6 +21,9 @@ class VulkanOutput:
 
     def _header(self):
         return f"VULKAN {self.name}\n"
+
+    def _comments(self):
+        return f"\"https://github.com/tyler-utah/AlloyForwardProgress/blob/master/artifact/cadp/{self.link[0]}/alloy_output/{self.link[1]}/{self.name}.txt\"\n"
 
     def _locations(self):
         location_declaration = "{\n"
@@ -77,6 +81,7 @@ class VulkanOutput:
 
     def dat3m_print(self):
         self.output += self._header()
+        self.output += self._comments()
         thread_map = self.expend_threads()
         self.output += self._locations()
         pretty_thread = pretty_print(thread_map)

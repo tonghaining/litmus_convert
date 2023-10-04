@@ -7,7 +7,7 @@ from ptx_output import *
 from vulkan_output import *
 
 
-def parse_file(path, test_name, arch):
+def parse_file(path, test_name, link, arch):
     file = open(path, mode='r')
     test_text = file.read()
     file.close()
@@ -19,9 +19,9 @@ def parse_file(path, test_name, arch):
         raise Exception(f"Error parsing {path}: {e}")
     program = test.to_program()
     if arch == "ptx":
-        output = PTXOutput(test_name, program)
+        output = PTXOutput(test_name, program, link)
     elif arch == "vulkan":
-        output = VulkanOutput(test_name, program)
+        output = VulkanOutput(test_name, program, link)
     res = output.dat3m_print()
     return res
 
@@ -44,8 +44,8 @@ def iterate_input_files(in_path, ptx_path, vulkan_path):
                         test_name = file.strip(".txt")
                         print(f"Processing {folder}/{test_name}")
                         test_input_path = os.path.join(in_path, folder, sub_folder, sub_sub_folder, file)
-                        ptx_parsed = parse_file(test_input_path, test_name, "ptx")
-                        vulkan_parsed = parse_file(test_input_path, test_name, "vulkan")
+                        ptx_parsed = parse_file(test_input_path, test_name, (folder, sub_sub_folder), "ptx")
+                        vulkan_parsed = parse_file(test_input_path, test_name, (folder, sub_sub_folder), "vulkan")
                         write_file(os.path.join(ptx_path, folder), test_name, ptx_parsed)
                         write_file(os.path.join(vulkan_path, folder), test_name, vulkan_parsed)
                         tests.append(f"{folder}/{test_name}")
