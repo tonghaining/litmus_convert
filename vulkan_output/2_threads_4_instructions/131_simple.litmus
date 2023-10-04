@@ -20,4 +20,4 @@ LC01:                                   | LC11:                                 
                                         | beq r3, 0, LC12                         ;
                                         | goto LC12                               ;
                                         | LC13:                                   ;
-exists true
+exists 0==0

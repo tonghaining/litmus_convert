@@ -32,7 +32,7 @@ class VulkanOutput:
         return location_declaration
 
     def _assertion(self):
-        return "exists true"
+        return "exists 0==0"
 
     def expend_instruction(self, tid, instruction):
         if tid not in self.labels:
@@ -68,6 +68,9 @@ class VulkanOutput:
             res = []
             for instruction in self.program.threads[tid]:
                 res.extend(self.expend_instruction(tid, instruction))
+                # Add label to the end of the thread
+                if "LC" not in res[-1]:
+                    res.append(f"LC{tid}{len(self.program.threads[tid])}:")
             thread_map[f"P{tid}@sg 0,wg 0, qf 0"] = res
         return thread_map
 

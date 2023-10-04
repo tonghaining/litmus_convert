@@ -7,7 +7,7 @@ P1:r2=0;
 }
 P0@sg 0,wg 0, qf 0                  | P1@sg 0,wg 0, qf 0                  ;
 st.atom.wg.sc0 Mem0, 1              | LC10:                               ;
-                                    | ld.atom.wg.sc0.semsc0 r0, Mem0      ;
+LC01:                               | ld.atom.wg.sc0.semsc0 r0, Mem0      ;
                                     | beq r0, 0, LC13                     ;
                                     | goto LC10                           ;
                                     | LC11:                               ;
@@ -19,4 +19,4 @@ st.atom.wg.sc0 Mem0, 1              | LC10:                               ;
                                     | beq r2, 0, LC12                     ;
                                     | goto LC12                           ;
                                     | LC13:                               ;
-exists true
+exists 0==0

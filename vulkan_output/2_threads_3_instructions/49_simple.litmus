@@ -15,4 +15,4 @@ rmw.atom.wg.sc0.semsc0 r1, Mem0, 0      |                                       
 beq r1, 0, LC01                         |                                         ;
 goto LC01                               |                                         ;
 LC02:                                   |                                         ;
-exists true
+exists 0==0

@@ -16,4 +16,5 @@ LC01:                                   | LC11:                                 
                                         | goto LC11                               ;
                                         | LC12:                                   ;
                                         | st.atom.wg.sc0 Mem0, 0                  ;
-exists true
+                                        | LC13:                                   ;
+exists 0==0

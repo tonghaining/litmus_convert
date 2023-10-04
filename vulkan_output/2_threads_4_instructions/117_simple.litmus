@@ -12,9 +12,10 @@ beq r0, 1, LC01                         | beq r1, 1, LC13                       
 goto LC00                               | goto LC10                               ;
 LC01:                                   | LC11:                                   ;
                                         | st.atom.wg.sc0 Mem0, 0                  ;
+                                        | LC13:                                   ;
                                         | LC12:                                   ;
                                         | ld.atom.wg.sc0.semsc0 r2, Mem0          ;
                                         | beq r2, 1, LC11                         ;
                                         | goto LC12                               ;
                                         | LC13:                                   ;
-exists true
+exists 0==0

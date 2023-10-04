@@ -32,7 +32,7 @@ class PTXOutput:
         return location_declaration
 
     def _assertion(self):
-        return "exists true"
+        return "exists 0==0"
 
     def expend_instruction(self, tid, instruction):
         if tid not in self.labels:
@@ -55,7 +55,7 @@ class PTXOutput:
             if current_label != instruction.iid:
                 res.append(f"LC{tid}{instruction.iid}:")
             reg = self.get_register(tid)
-            res.append(f"atom.relaxed.gpu {reg}, {instruction.loc}, {instruction.integer}")
+            res.append(f"atom.relaxed.gpu.exch {reg}, {instruction.loc}, {instruction.integer}")
             res.append(f"beq {reg}, {instruction.return_value}, LC{tid}{instruction.instruction_id + 1}")
             res.append(f"goto LC{tid}{instruction.iid}")
             res.append(f"LC{tid}{instruction.iid + 1}:")
@@ -68,6 +68,9 @@ class PTXOutput:
             res = []
             for instruction in self.program.threads[tid]:
                 res.extend(self.expend_instruction(tid, instruction))
+                # Add label to the end of the thread
+                if "LC" not in res[-1]:
+                    res.append(f"LC{tid}{len(self.program.threads[tid])}:")
             thread_map[f"P{tid}@cta 0,gpu 0"] = res
         return thread_map
 

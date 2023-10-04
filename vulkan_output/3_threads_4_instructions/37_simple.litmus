@@ -16,4 +16,4 @@ LC01:                                   | LC11:                                 
                                         |                                         | beq r3, 1, LC21                         ;
                                         |                                         | goto LC21                               ;
                                         |                                         | LC22:                                   ;
-exists true
+exists 0==0

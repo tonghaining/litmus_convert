@@ -16,4 +16,5 @@ beq r1, 0, LC01                         |                                       
 goto LC01                               |                                         ;
 LC02:                                   |                                         ;
 st.atom.wg.sc0 Mem0, 0                  |                                         ;
-exists true
+LC03:                                   |                                         ;
+exists 0==0

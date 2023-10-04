@@ -1,13 +1,13 @@
 PTX 90_simple
 {
-Mem0=0;
 Mem1=0;
+Mem0=0;
 P1:r0=0;
 P1:r1=0;
 }
 P0@cta 0,gpu 0               | P1@cta 0,gpu 0               | P2@cta 0,gpu 0               ;
 st.relaxed.gpu Mem1, 1       | LC10:                        | st.relaxed.gpu Mem0, 1       ;
-                             | ld.relaxed.gpu r0, Mem0      |                              ;
+LC01:                        | ld.relaxed.gpu r0, Mem0      | LC21:                        ;
                              | beq r0, 0, LC11              |                              ;
                              | goto LC10                    |                              ;
                              | LC11:                        |                              ;
@@ -15,4 +15,4 @@ st.relaxed.gpu Mem1, 1       | LC10:                        | st.relaxed.gpu Mem
                              | beq r1, 0, LC11              |                              ;
                              | goto LC11                    |                              ;
                              | LC12:                        |                              ;
-exists true
+exists 0==0

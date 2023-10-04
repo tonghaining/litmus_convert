@@ -5,8 +5,8 @@ P0:r0=0;
 }
 P0@cta 0,gpu 0               | P1@cta 0,gpu 0               ;
 LC00:                        | st.relaxed.gpu Mem0, 0       ;
-ld.relaxed.gpu r0, Mem0      | st.relaxed.gpu Mem0, 1       ;
-beq r0, 0, LC01              |                              ;
-goto LC00                    |                              ;
+ld.relaxed.gpu r0, Mem0      | LC12:                        ;
+beq r0, 0, LC01              | st.relaxed.gpu Mem0, 1       ;
+goto LC00                    | LC12:                        ;
 LC01:                        |                              ;
-exists true
+exists 0==0

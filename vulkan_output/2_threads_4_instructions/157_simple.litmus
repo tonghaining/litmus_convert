@@ -6,10 +6,12 @@ P1:r1=0;
 }
 P0@sg 0,wg 0, qf 0                      | P1@sg 0,wg 0, qf 0                      ;
 LC00:                                   | st.atom.wg.sc0 Mem0, 1                  ;
-rmw.atom.wg.sc0.semsc0 r0, Mem0, 0      | LC11:                                   ;
-beq r0, 0, LC01                         | rmw.atom.wg.sc0.semsc0 r1, Mem0, 0      ;
-goto LC00                               | beq r1, 0, LC13                         ;
-LC01:                                   | goto LC11                               ;
+rmw.atom.wg.sc0.semsc0 r0, Mem0, 0      | LC13:                                   ;
+beq r0, 0, LC01                         | LC11:                                   ;
+goto LC00                               | rmw.atom.wg.sc0.semsc0 r1, Mem0, 0      ;
+LC01:                                   | beq r1, 0, LC13                         ;
+                                        | goto LC11                               ;
                                         | LC12:                                   ;
                                         | st.atom.wg.sc0 Mem0, 1                  ;
-exists true
+                                        | LC13:                                   ;
+exists 0==0

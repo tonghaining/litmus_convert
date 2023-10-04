@@ -1,7 +1,7 @@
 VULKAN 155_simple
 {
-Mem0=0;
 Mem1=0;
+Mem0=0;
 P0:r0=0;
 P1:r1=0;
 P1:r2=0;
@@ -13,7 +13,7 @@ beq r0, 0, LC01                         | beq r1, 0, LC11                       
 goto LC00                               | goto LC10                               ;
 LC01:                                   | LC11:                                   ;
 st.atom.wg.sc0 Mem0, 1                  | rmw.atom.wg.sc0.semsc0 r2, Mem1, 0      ;
-                                        | beq r2, 1, LC12                         ;
+LC02:                                   | beq r2, 1, LC12                         ;
                                         | goto LC11                               ;
                                         | LC12:                                   ;
-exists true
+exists 0==0
