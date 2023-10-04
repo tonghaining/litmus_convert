@@ -12,20 +12,20 @@ class Store:
 
 
 class EqGoto:
-    def __init__(self, iid, loc, return_value, instruction_id):
+    def __init__(self, iid, loc, return_value, target_label):
         self.iid = iid
         self.loc = loc
         self.return_value = return_value
-        self.instruction_id = instruction_id
+        self.target_label = target_label
 
 
 class ExchGoto:
-    def __init__(self, iid, loc, integer, return_value, instruction_id):
+    def __init__(self, iid, loc, integer, return_value, target_label):
         self.iid = iid
         self.loc = loc
         self.integer = integer
         self.return_value = return_value
-        self.instruction_id = instruction_id
+        self.target_label = target_label
 
 
 class Dat3mProgram:
@@ -48,11 +48,11 @@ class Dat3mProgram:
     def add_store(self, iid, loc, value):
         self.current_thread.append(Store(iid, loc, value))
 
-    def add_eq_goto(self, iid, loc, return_value, instruction_id):
-        self.current_thread.append(EqGoto(iid, loc, return_value, instruction_id))
+    def add_eq_goto(self, iid, loc, return_value, target_label):
+        self.current_thread.append(EqGoto(iid, loc, return_value, target_label))
 
-    def add_exch_goto(self, iid, loc, integer, return_value, instruction_id):
-        self.current_thread.append(ExchGoto(iid, loc, integer, return_value, instruction_id))
+    def add_exch_goto(self, iid, loc, integer, return_value, target_label):
+        self.current_thread.append(ExchGoto(iid, loc, integer, return_value, target_label))
 
     def to_program(self):
         return self
@@ -62,9 +62,9 @@ class Dat3mProgram:
         for tid in self.threads:
             for instruction in self.threads[tid]:
                 if type(instruction).__name__ == 'EqGoto' or type(instruction).__name__ == 'ExchGoto':
-                    if instruction.instruction_id == "END":
-                        instruction.instruction_id = len(self.threads[tid]) - 1
+                    if instruction.target_label == "END":
+                        instruction.target_label = len(self.threads[tid])
                     else:
-                        instruction.instruction_id = int(instruction.instruction_id)
+                        instruction.target_label = int(instruction.target_label)
         self.current_thread = None
         self.current_thread_id = None

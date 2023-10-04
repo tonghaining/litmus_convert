@@ -4,9 +4,9 @@ Mem0=0;
 P0:r0=0;
 }
 P0@sg 0,wg 0, qf 0                  | P1@sg 0,wg 0, qf 0                  ;
-LC00:                               | st.atom.wg.sc0 Mem0, 1              ;
-ld.atom.wg.sc0.semsc0 r0, Mem0      | LC12:                               ;
-beq r0, 1, LC01                     | st.atom.wg.sc0 Mem0, 0              ;
-goto LC00                           | LC12:                               ;
-LC01:                               |                                     ;
+LC00:                               | LC10:                               ;
+ld.atom.wg.sc0.semsc0 r0, Mem0      | st.atom.wg.sc0 Mem0, 1              ;
+beq r0, 1, LC01                     | LC11:                               ;
+goto LC00                           | st.atom.wg.sc0 Mem0, 0              ;
+LC01:                               | LC12:                               ;
 exists 0==0

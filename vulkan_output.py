@@ -35,31 +35,32 @@ class VulkanOutput:
         return "exists 0==0"
 
     def expend_instruction(self, tid, instruction):
+
         if tid not in self.labels:
             self.labels[tid] = None
+
         current_label = self.labels[tid]
         res = []
+
+        if current_label != instruction.iid:
+            res.append(f"LC{tid}{instruction.iid}:")
 
         if type(instruction).__name__ == 'Store':
             res.append(f"st.atom.wg.sc0 {instruction.loc}, {instruction.value}")
         elif type(instruction).__name__ == 'EqGoto':
-            if current_label != instruction.iid:
-                res.append(f"LC{tid}{instruction.iid}:")
             reg = self.get_register(tid)
             res.append(f"ld.atom.wg.sc0.semsc0 {reg}, {instruction.loc}")  # .acq?
             res.append(f"beq {reg}, {instruction.return_value}, LC{tid}{instruction.iid + 1}")
-            res.append(f"goto LC{tid}{instruction.iid}")
-            res.append(f"LC{tid}{instruction.iid + 1}:")
-            self.labels[tid] = instruction.iid + 1
+            res.append(f"goto LC{tid}{instruction.target_label}")
         elif type(instruction).__name__ == 'ExchGoto':
-            if current_label != instruction.iid:
-                res.append(f"LC{tid}{instruction.iid}:")
             reg = self.get_register(tid)
             res.append(f"rmw.atom.wg.sc0.semsc0 {reg}, {instruction.loc}, {instruction.integer}")  # .acq?
             res.append(f"beq {reg}, {instruction.return_value}, LC{tid}{instruction.iid + 1}")
-            res.append(f"goto LC{tid}{instruction.iid}")
-            res.append(f"LC{tid}{instruction.iid + 1}:")
-            self.labels[tid] = instruction.iid + 1
+            res.append(f"goto LC{tid}{instruction.target_label}")
+
+        res.append(f"LC{tid}{instruction.iid + 1}:")
+        self.labels[tid] = instruction.iid + 1
+
         return res
 
     def expend_threads(self):

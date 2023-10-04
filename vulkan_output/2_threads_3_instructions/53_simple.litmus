@@ -13,6 +13,6 @@ goto LC00                               | goto LC10                             
 LC01:                                   | LC11:                                   ;
                                         | rmw.atom.wg.sc0.semsc0 r2, Mem0, 0      ;
                                         | beq r2, 1, LC12                         ;
-                                        | goto LC11                               ;
+                                        | goto LC10                               ;
                                         | LC12:                                   ;
 exists 0==0
