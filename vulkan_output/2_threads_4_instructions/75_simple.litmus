@@ -1,8 +1,8 @@
 VULKAN 75_simple
 "https://github.com/tyler-utah/AlloyForwardProgress/blob/master/artifact/cadp/2_threads_4_instructions/alloy_output/75/75_simple.txt"
 {
-Mem1=0;
 Mem0=0;
+Mem1=0;
 P1:r0=0;
 P1:r1=0;
 }

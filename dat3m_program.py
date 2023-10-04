@@ -20,10 +20,10 @@ class EqGoto:
 
 
 class ExchGoto:
-    def __init__(self, iid, loc, integer, return_value, target_label):
+    def __init__(self, iid, loc, value, return_value, target_label):
         self.iid = iid
         self.loc = loc
-        self.integer = integer
+        self.value = value
         self.return_value = return_value
         self.target_label = target_label
 
@@ -51,8 +51,8 @@ class Dat3mProgram:
     def add_eq_goto(self, iid, loc, return_value, target_label):
         self.current_thread.append(EqGoto(iid, loc, return_value, target_label))
 
-    def add_exch_goto(self, iid, loc, integer, return_value, target_label):
-        self.current_thread.append(ExchGoto(iid, loc, integer, return_value, target_label))
+    def add_exch_goto(self, iid, loc, value, return_value, target_label):
+        self.current_thread.append(ExchGoto(iid, loc, value, return_value, target_label))
 
     def to_program(self):
         return self

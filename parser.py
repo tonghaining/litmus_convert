@@ -44,22 +44,22 @@ class Transformer(lark.Transformer):
             line=meta.line,
         )
 
-    def eq_goto(self, meta, iid, loc, return_value, instruction_id):
+    def eq_goto(self, meta, iid, loc, return_value, goto_label):
         return EqGoto(
             iid=iid,
             loc=loc,
             return_value=return_value,
-            instruction_id=instruction_id,
+            goto_label=goto_label,
             line=meta.line,
         )
 
-    def exch_goto(self, meta, iid, loc, integer, return_value, instruction_id):
+    def exch_goto(self, meta, iid, loc, value, return_value, goto_label):
         return ExchGoto(
             iid=iid,
             loc=loc,
-            integer=integer,
+            value=value,
             return_value=return_value,
-            instruction_id=instruction_id,
+            goto_label=goto_label,
             line=meta.line,
         )
 
@@ -76,6 +76,7 @@ class Transformer(lark.Transformer):
 
     def num(self, meta, n):
         return int(n)
+
 
 def parse(contents):
     file_path = os.path.dirname(os.path.realpath(__file__))

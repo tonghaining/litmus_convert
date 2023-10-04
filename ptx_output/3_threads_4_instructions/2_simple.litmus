@@ -1,8 +1,8 @@
 PTX 2_simple
 "https://github.com/tyler-utah/AlloyForwardProgress/blob/master/artifact/cadp/3_threads_4_instructions/alloy_output/2/2_simple.txt"
 {
-Mem1=0;
 Mem0=0;
+Mem1=0;
 P1:r0=0;
 P2:r1=0;
 }

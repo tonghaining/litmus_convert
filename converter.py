@@ -53,8 +53,8 @@ def iterate_input_files(in_path, ptx_path, vulkan_path):
 
 
 def prepare_expectation(tests, expectation_path):
-    prefix_vulkan = "litmus/VULKAN/Cadp/"
-    prefix_ptx = "litmus/PTX/Cadp/"
+    prefix_vulkan = "litmus/VULKAN/Liveness/"
+    prefix_ptx = "litmus/PTX/Liveness/"
     sufix = ".litmus,1"
     with open(f"{expectation_path}_ptx.csv", mode='w') as file:
         for test in tests:

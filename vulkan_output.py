@@ -58,7 +58,7 @@ class VulkanOutput:
             res.append(f"goto LC{tid}{instruction.target_label}")
         elif type(instruction).__name__ == 'ExchGoto':
             reg = self.get_register(tid)
-            res.append(f"rmw.atom.wg.sc0.semsc0 {reg}, {instruction.loc}, {instruction.integer}")  # .acq?
+            res.append(f"rmw.atom.wg.sc0.semsc0 {reg}, {instruction.loc}, {instruction.value}")  # .acq?
             res.append(f"beq {reg}, {instruction.return_value}, LC{tid}{instruction.iid + 1}")
             res.append(f"goto LC{tid}{instruction.target_label}")
 
